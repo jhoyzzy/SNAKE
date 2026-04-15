@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "VT323", monospace;
+  --font-mono: "Press Start 2P", cursive;
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
+@layer base {
+  :root {
+    --background: 240 10% 2%;
+    --foreground: 180 100% 50%; /* Cyan */
+    --card: 240 10% 4%;
+    --card-foreground: 300 100% 50%; /* Magenta */
+    --popover: 240 10% 4%;
+    --popover-foreground: 180 100% 50%;
+    --primary: 180 100% 50%; /* Cyan */
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 300 100% 50%; /* Magenta */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 10%;
+    --muted-foreground: 240 5% 45%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 180 100% 50% / 0.2;
+    --input: 240 10% 10%;
+    --ring: 180 100% 50%;
+    --radius: 0px; /* Sharp edges for retro feel */
+  }
+}
+
+@layer utilities {
+  .glitch-text {
+    position: relative;
+    text-shadow: 0.05em 0 0 rgba(255, 0, 122, 0.75),
+                -0.025em -0.05em 0 rgba(0, 243, 255, 0.75),
+                0.025em 0.05em 0 rgba(57, 255, 20, 0.75);
+    animation: glitch 500ms infinite;
+  }
+
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 99;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    animation: scanline 10s linear infinite;
+  }
+
+  .crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 100;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 122, 0.75), -0.05em -0.025em 0 rgba(0, 243, 255, 0.75), -0.025em 0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    14% {
+      text-shadow: 0.05em 0 0 rgba(255, 0, 122, 0.75), -0.05em -0.025em 0 rgba(0, 243, 255, 0.75), -0.025em 0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 122, 0.75), 0.025em 0.025em 0 rgba(0, 243, 255, 0.75), -0.05em -0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 rgba(255, 0, 122, 0.75), 0.025em 0.025em 0 rgba(0, 243, 255, 0.75), -0.05em -0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 122, 0.75), 0.05em 0 0 rgba(0, 243, 255, 0.75), 0 -0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 rgba(255, 0, 122, 0.75), 0.05em 0 0 rgba(0, 243, 255, 0.75), 0 -0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+    100% {
+      text-shadow: -0.025em 0 0 rgba(255, 0, 122, 0.75), -0.025em -0.025em 0 rgba(0, 243, 255, 0.75), -0.025em -0.05em 0 rgba(57, 255, 20, 0.75);
+    }
+  }
+
+  @keyframes scanline {
+    0% { bottom: 100%; }
+    80% { bottom: 100%; }
+    100% { bottom: 0%; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
